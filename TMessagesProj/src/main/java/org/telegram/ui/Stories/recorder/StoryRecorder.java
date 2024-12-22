@@ -2817,6 +2817,12 @@ public class StoryRecorder implements NotificationCenter.NotificationCenterDeleg
                 return !inCheck();
             }
         };
+        modeSwitcherView.setFromChat(false);
+        modeSwitcherView.setOnTouchListener((v, event) -> {
+            modeSwitcherView.dispatchTouchEvent(event);
+            return false;
+        });
+
         modeSwitcherView.setOnSwitchModeListener(newIsVideo -> {
             if (takingPhoto || takingVideo) {
                 return;

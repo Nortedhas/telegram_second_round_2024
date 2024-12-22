@@ -159,7 +159,12 @@ public class PhotoVideoSwitcherView extends View implements FlashViews.Invertabl
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        float cy = getHeight() / 2f;
+        float cy;
+        if (!fromChat) {
+            cy = getHeight() / 2f;
+        } else {
+            cy = getHeight() - dp(60);
+        }
         float x = getScrollCx();
 
         final int oy = -dp(1);
@@ -245,6 +250,12 @@ public class PhotoVideoSwitcherView extends View implements FlashViews.Invertabl
 
     private float modeAtTouchDown;
     private boolean scrolledEnough;
+
+    private boolean fromChat = false;
+
+    public void setFromChat(boolean fromChat) {
+        this.fromChat = fromChat;
+    }
 
     public boolean scrolledEnough() {
         return scrolledEnough || (scrolledEnough = Math.abs(mode - modeAtTouchDown) > .1f);
